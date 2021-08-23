@@ -44,9 +44,14 @@ function SignIn() {
           handleChange={handleChange}
           required
         />
-
-        <CustomButton type="submit" value="Submit" >sign in</CustomButton>
-        <CustomButton onClick={signInWithGoogle} >sign in with google</CustomButton>
+        <div className="buttons">
+          <CustomButton type="submit" value="Submit">
+            sign in
+          </CustomButton>
+          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            sign in with google
+          </CustomButton>
+        </div>
       </form>
     </div>
   );
