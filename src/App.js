@@ -8,14 +8,14 @@ import Homepage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
-import { auth } from "./firebase/firebase.utils";
+import { auth,createUserProfileDocument } from "./firebase/firebase.utils";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
+    auth.onAuthStateChanged(async user => {
+      createUserProfileDocument(user)
     });
   }, [currentUser]);
 
