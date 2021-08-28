@@ -27,6 +27,7 @@ function App() {
         setCurrentUser(null);
       }
     });
+    console.log(currentUser);
     return () => unsubscribe();
   }, []);
 
