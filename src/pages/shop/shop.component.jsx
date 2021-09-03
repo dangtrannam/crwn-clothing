@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import CollectionPreview from "../../components/collection-preview/collection-preview.component";
+import { selectShopItems } from "../../redux/shop/shop.selectors";
 
-import SHOP_DATA from "./shop.data";
 
-function ShopPage() {
-  const [collections, setCollections] = useState(SHOP_DATA);
+function ShopPage({ collections }) {
 
   return (
     <div className="shop-page">
@@ -17,4 +17,8 @@ function ShopPage() {
   );
 }
 
-export default ShopPage;
+const mapStateToProps = createStructuredSelector({
+  collections: selectShopItems
+});
+
+export default connect(mapStateToProps)(ShopPage);
