@@ -6,7 +6,7 @@ function StripeChckoutButton({ price }) {
   const publicshableKey =
     "pk_test_51JZArgAvntHpS7rjxv3nKOTQCzFCO7Qnx8mbj2mqNY2M5EuBn5vaiaVQPyk4nFX889N2PtA7OzPPAdmhpDU8DCtM00RvUpjEVu";
   const onToken = (token) => {
-    console.log(token);
+    // console.log(token);
     alert("Payment Successful");
   };
 
