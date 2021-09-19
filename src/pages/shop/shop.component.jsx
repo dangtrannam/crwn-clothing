@@ -21,13 +21,15 @@ function ShopPage({ match, updateCollections }) {
 
   useEffect(() => {
     const collectionRef = firestore.collection("collection");
-
-    collectionRef.onSnapshot(async (snapshot) => {
+    
+    const unsubscribe = collectionRef.onSnapshot(async (snapshot) => {
       const collectionMap = convertCollectionsSnapshotToMap(snapshot);
       console.log(collectionMap);
       await updateCollections(collectionMap);
       setLoading(false);
     });
+
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -36,12 +38,14 @@ function ShopPage({ match, updateCollections }) {
         exact
         path={`${match.path}`}
         render={(props) => (
-          <CollectionsOverviewWithSpinner isLoading={loading} {...props}/>
+          <CollectionsOverviewWithSpinner isLoading={loading} {...props} />
         )}
       />
       <Route
         path={`${match.path}/:collectionId`}
-        render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props}/>}
+        render={(props) => (
+          <CollectionPageWithSpinner isLoading={loading} {...props} />
+        )}
       />
     </div>
   );
