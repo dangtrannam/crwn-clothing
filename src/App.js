@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router";
 import { createStructuredSelector } from "reselect";
 
@@ -44,7 +44,9 @@ function App({ setCurrentUser, currentUser } ) {
         <Route
           exact
           path="/signin"
-          render={() => currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />}
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+          }
         />
       </Switch>
     </div>
