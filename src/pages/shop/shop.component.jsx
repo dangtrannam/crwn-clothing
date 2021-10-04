@@ -1,18 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Route } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
 import CollectionPageContainer from "../collection/collection.container";
 
 import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 
-function ShopPage({ match, fetchCollectionsStart }) {
- 
+function ShopPage({ match }) {
+  const dispatch = useDispatch();
+  const fetchCollectionsStartHandler = useCallback(
+    () => dispatch(fetchCollectionsStart()),
+    [dispatch]
+  );
+
   useEffect(() => {
-    fetchCollectionsStart();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    fetchCollectionsStartHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="shop-page">
       <Route
@@ -28,9 +33,4 @@ function ShopPage({ match, fetchCollectionsStart }) {
   );
 }
 
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
-});
-
-export default connect(null, mapDispatchToProps)(ShopPage);
+export default ShopPage;
